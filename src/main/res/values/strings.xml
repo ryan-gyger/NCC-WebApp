@@ -2,4 +2,29 @@
     <string name="app_name">Team14</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="drawer_close">close drawer</string>
+    <string name="drawer_open">open drawer</string>
+    <string name="takenAt">Coordinates Taken At: </string>
+    <string name="zero">0.0</string>
+    <string name="price">Price: </string>
+    <string name="dateCreated">Date Created: </string>
+    <string name="editBtn">Edit</string>
+    <string name="buyBtn">Buy</string>
+    <string name="symbol">Symbol: </string>
+    <string name="desc">Description: </string>
+    <string name="cordLong">Long Coordinates: </string>
+    <string name="cordLat">Lat Coordinates: </string>
+    <string name="submit">Submit</string>
+    <string name="addBtn">Add</string>
+
+    <string-array name="nav_titles_array">
+        <item>Stock Ideas</item>
+        <item>Past Trades</item>
+        <item>Add Stock Idea</item>
+    </string-array>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
