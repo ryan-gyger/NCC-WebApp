@@ -1,14 +1,37 @@
 package example.com.team14;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 
 /**
@@ -84,6 +107,7 @@ public class StockDetailedFragment extends Fragment {
         return mView;
     }
 
+
     private void initView() {
         mSymbol = (TextView) mView.findViewById(R.id.symbol);
         mDesc = (TextView) mView.findViewById(R.id.desc);
@@ -157,5 +181,4 @@ public class StockDetailedFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
         public void changeFragment(int position);
     }
-
 }
