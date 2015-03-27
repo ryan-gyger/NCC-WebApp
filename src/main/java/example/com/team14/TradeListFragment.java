@@ -26,7 +26,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class StockListFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class TradeListFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,11 +49,11 @@ public class StockListFragment extends Fragment implements AbsListView.OnItemCli
      * Views.
      */
     private ListAdapter mAdapter;
-    private List<Stock> mStockList;
+    private List<Trade> mTradeList;
 
     // TODO: Rename and change types of parameters
-    public static StockListFragment newInstance(String param1, String param2) {
-        StockListFragment fragment = new StockListFragment();
+    public static TradeListFragment newInstance(String param1, String param2) {
+        TradeListFragment fragment = new TradeListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,7 +65,22 @@ public class StockListFragment extends Fragment implements AbsListView.OnItemCli
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public StockListFragment() {
+    public TradeListFragment() {
+    }
+
+    public void initAdapter() {
+        mTradeList = Trade.getAll();
+        ArrayList<String> itemNames = new ArrayList<String>();
+
+        for(int i = 0; i < mTradeList.size(); ++i) {
+            itemNames.add(mTradeList.get(i).getStock().getSymbol());
+        }
+
+        Collections.sort(itemNames);
+
+        mAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_list_item_1, itemNames);
+
     }
 
     @Override
@@ -80,27 +95,10 @@ public class StockListFragment extends Fragment implements AbsListView.OnItemCli
         initAdapter();
     }
 
-
-    public void initAdapter() {
-        mStockList = Stock.getAll();
-        ArrayList<String> itemNames = new ArrayList<String>();
-
-        for(int i = 0; i < mStockList.size(); ++i) {
-            itemNames.add(mStockList.get(i).getSymbol());
-        }
-
-        Collections.sort(itemNames);
-
-        mAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, itemNames);
-
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_stock, container, false);
+        View view = inflater.inflate(R.layout.fragment_trade, container, false);
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
@@ -135,7 +133,7 @@ public class StockListFragment extends Fragment implements AbsListView.OnItemCli
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(mStockList.get(position).getId());
+            mListener.onFragmentInteraction(mTradeList.get(position));
         }
     }
 
@@ -164,7 +162,7 @@ public class StockListFragment extends Fragment implements AbsListView.OnItemCli
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(Long id);
+        public void onFragmentInteraction(Trade trade);
     }
 
 }

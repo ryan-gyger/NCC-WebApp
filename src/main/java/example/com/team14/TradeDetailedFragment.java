@@ -7,24 +7,23 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link StockBuyFragment.OnFragmentInteractionListener} interface
+ * {@link TradeDetailedFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link StockBuyFragment#newInstance} factory method to
+ * Use the {@link TradeDetailedFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StockBuyFragment extends Fragment {
+public class TradeDetailedFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public static Stock selectedStock;
+    public static Trade selectedTrade;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -32,11 +31,11 @@ public class StockBuyFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private View mView;
-    private Button mSubmit;
-    private Trade mTrade;
-    private EditText mSymbol;
-    private EditText mQuantity;
-    private EditText mPrice;
+    private TextView mSymbol;
+    private TextView mQuantity;
+    private TextView mDateTime;
+    private TextView mPrice;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -44,11 +43,11 @@ public class StockBuyFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment StockBuyFragment.
+     * @return A new instance of fragment TradeDetailedFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StockBuyFragment newInstance(String param1, String param2) {
-        StockBuyFragment fragment = new StockBuyFragment();
+    public static TradeDetailedFragment newInstance(String param1, String param2) {
+        TradeDetailedFragment fragment = new TradeDetailedFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -56,7 +55,7 @@ public class StockBuyFragment extends Fragment {
         return fragment;
     }
 
-    public StockBuyFragment() {
+    public TradeDetailedFragment() {
         // Required empty public constructor
     }
 
@@ -73,7 +72,7 @@ public class StockBuyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_stock_buy, container, false);
+        mView = inflater.inflate(R.layout.fragment_trade_detailed, container, false);
 
         initView();
 
@@ -81,32 +80,15 @@ public class StockBuyFragment extends Fragment {
     }
 
     private void initView() {
-        mQuantity = (EditText) mView.findViewById(R.id.quantityET);
-        mPrice = (EditText) mView.findViewById(R.id.priceET);
-        mSymbol = (EditText) mView.findViewById(R.id.symbolET);
+        mSymbol = (TextView) mView.findViewById(R.id.symbol);
+        mQuantity = (TextView) mView.findViewById(R.id.quantity);
+        mDateTime = (TextView) mView.findViewById(R.id.dateTime);
+        mPrice = (TextView) mView.findViewById(R.id.price);
 
-        mSymbol.setText(selectedStock.getSymbol());
-
-        mSubmit = (Button) mView.findViewById(R.id.submit);
-        mSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mTrade == null) {
-                    mTrade = new Trade();
-                }
-
-                mTrade.quantity = Integer.parseInt(mQuantity.getText().toString());
-                mTrade.price = Double.parseDouble(mPrice.getText().toString());
-                mTrade.stock = selectedStock;
-                mTrade.dateTime = NowUtil.now();
-
-                mTrade.save();
-
-                StockDetailedFragment.selectedStock = selectedStock;
-                selectedStock = null;
-                mListener.changeFragment(MainActivity.STOCKDETAILEDFRAGMENT);
-            }
-        });
+        mSymbol.setText(selectedTrade.getStock().getSymbol());
+        mQuantity.setText(String.valueOf(selectedTrade.getQuantity()));
+        mPrice.setText(String.valueOf(selectedTrade.getPrice()));
+        mDateTime.setText(String.valueOf(selectedTrade.getDateTime()));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -146,7 +128,6 @@ public class StockBuyFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
-        public void changeFragment(int position);
     }
 
 }

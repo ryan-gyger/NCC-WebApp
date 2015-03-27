@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="example.com.nccmobile.StockBuyFragment"
+    tools:context="example.com.nccmobile.TradeDetailedFragment"
     android:orientation="vertical">
 
     <TextView
@@ -13,23 +13,30 @@
         android:layout_width="wrap_content"
         />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/symbolET"
-        android:editable="false"/>
-
     <TextView
-        android:text="@string/quantity"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        />
-
-    <EditText
+        android:text="@string/hello_world"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/quantityET"
-        />
+        android:id="@+id/symbol"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:text="@string/quantity"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+
+        <TextView
+            android:text="@string/zero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/quantity"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,21 +44,31 @@
         android:orientation="horizontal">
         <TextView
             android:text="@string/price"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+
+        <TextView
+            android:text="@string/zero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/price"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:text="@string/dateCreated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <EditText
+        <TextView
+            android:text="@string/zero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/priceET"
-            />
+            android:id="@+id/dateTime"/>
     </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/submit"
-        android:layout_gravity="center"
-        android:text="@string/submit"/>
-
 </LinearLayout>

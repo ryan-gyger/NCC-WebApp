@@ -3,8 +3,10 @@ package example.com.team14;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
 import java.sql.Date;
+import java.util.List;
 
 @Table(name = "Trades")
 public class Trade extends Model {
@@ -27,6 +29,13 @@ public class Trade extends Model {
         this.price = price;
         this.quantity = quantity;
         this.dateTime = dateTime;
+    }
+
+
+    public static List<Trade> getAll() {
+        return new Select()
+                .from(Trade.class)
+                .execute();
     }
 
     public Stock getStock() {

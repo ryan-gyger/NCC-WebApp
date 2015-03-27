@@ -25,12 +25,17 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity implements
         StockListFragment.OnFragmentInteractionListener,
         StockDetailedFragment.OnFragmentInteractionListener,
-        StockEditFragment.OnFragmentInteractionListener{
+        StockEditFragment.OnFragmentInteractionListener,
+        StockBuyFragment.OnFragmentInteractionListener,
+        TradeListFragment.OnFragmentInteractionListener,
+        TradeDetailedFragment.OnFragmentInteractionListener{
     public static final int STOCKLISTFRAGMENT = 0;
-    public static final int STOCKBUYFRAGMENT = 1;
+    public static final int TRADELISTFRAGMENT = 1;
     public static final int STOCKADDFRAGMENT = 2;
     public static final int STOCKDETAILEDFRAGMENT = 11;
     public static final int STOCKEDITFRAGMENT = 12;
+    public static final int STOCKBUYFRAGMENT = 13;
+    public static final int TRADEDETAILEDFRAGMENT = 14;
 
     private List<String> mNavTitles;
     private DrawerLayout mDrawerLayout;
@@ -92,6 +97,12 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void onFragmentInteraction(Trade trade) {
+        TradeDetailedFragment.selectedTrade = trade;
+        changeFragment(TRADEDETAILEDFRAGMENT);
     }
 
 
@@ -158,6 +169,9 @@ public class MainActivity extends ActionBarActivity implements
             case STOCKLISTFRAGMENT:
                 fragment = new StockListFragment();
                 break;
+            case TRADELISTFRAGMENT:
+                fragment = new TradeListFragment();
+                break;
             case STOCKADDFRAGMENT:
                 fragment = new StockEditFragment();
                 break;
@@ -166,6 +180,12 @@ public class MainActivity extends ActionBarActivity implements
                 break;
             case STOCKEDITFRAGMENT:
                 fragment = new StockEditFragment();
+                break;
+            case STOCKBUYFRAGMENT:
+                fragment = new StockBuyFragment();
+                break;
+            case TRADEDETAILEDFRAGMENT:
+                fragment = new TradeDetailedFragment();
                 break;
             default:
                 fragment = new StockListFragment();

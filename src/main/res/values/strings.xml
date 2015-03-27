@@ -16,6 +16,7 @@
     <string name="cordLat">Lat Coordinates: </string>
     <string name="submit">Submit</string>
     <string name="addBtn">Add</string>
+    <string name="quantity">Quantity: </string>
 
     <string-array name="nav_titles_array">
         <item>Stock Ideas</item>
